@@ -1,73 +1,109 @@
-/* Default Variables (Light Theme) */
+/* --- Reimagined Variables: High Contrast & Vibrant --- */
 :root {
-    --bg-color: #f4f7f6;
-    --sidebar-color: #ffffff;
+    --bg-color: #f0f2f5;
+    --sidebar-color: #1c1e21;
     --card-bg: #ffffff;
-    --text-color: #333;
-    --accent-color: #4a90e2;
+    --text-color: #050505;
+    --accent-color: #6200ee;
 }
 
-/* Dark Theme Overrides */
+/* Dark Theme: Deep Space Slate */
 [data-theme="dark"] {
-    --bg-color: #1a1a2e;
-    --sidebar-color: #16213e;
-    --card-bg: #0f3460;
-    --text-color: #e94560;
-    --accent-color: #00d2ff;
+    --bg-color: #0b0e14;
+    --sidebar-color: #151921;
+    --card-bg: #1c212c;
+    --text-color: #f5f6f7;
+    --accent-color: #03dac6;
 }
 
-/* Custom (Neon/Retro) Theme Overrides */
+/* Custom Theme: Cyberpunk Sunset */
 [data-theme="custom"] {
-    --bg-color: #2b0035;
-    --sidebar-color: #4b0082;
-    --card-bg: #1a001a;
-    --text-color: #00ff41;
-    --accent-color: #ff00ff;
+    --bg-color: #120458;
+    --sidebar-color: #000000;
+    --card-bg: #2d033b;
+    --text-color: #fec107;
+    --accent-color: #ff0055;
 }
 
+/* Global Reset & Body Styling */
 body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--bg-color);
+    padding: 0;
+    line-height: 1.6;
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--bg-color);
     color: var(--text-color);
-    transition: all 0.3s ease; /* Smooth transition */
+    transition: background 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s ease;
 }
 
-.dashboard { display: flex; min-height: 100vh; }
+/* Layout: Using Grid instead of Flex for the main wrapper */
+.dashboard {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    height: 100vh;
+    overflow: hidden;
+}
 
+/* Sidebar: Floating glass effect */
 .sidebar {
-    width: 200px;
-    background-color: var(--sidebar-color);
-    padding: 20px;
-    border-right: 1px solid rgba(0,0,0,0.1);
+    position: relative;
+    background: var(--sidebar-color);
+    box-sizing: border-box;
+    padding: 2rem 1.5rem;
+    box-shadow: 4px 0 15px rgba(0,0,0,0.05);
 }
 
-.content { flex-grow: 1; padding: 20px; }
+/* Content: Scrollable container */
+.content {
+    overflow-y: auto;
+    padding: 2.5rem;
+    backdrop-filter: blur(5px);
+}
 
+/* Header: Modern Spacing */
 header {
     display: flex;
+    align-items: center;
     justify-content: space-between;
-    margin-bottom: 30px;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--accent-color);
 }
 
+/* Grid: Tightened spacing and responsive logic */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
 }
 
+/* Cards: Neo-brutalism style */
 .card {
-    background-color: var(--card-bg);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    background: var(--card-bg);
+    border: 1px solid rgba(128,128,128,0.2);
+    padding: 1.5rem;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+/* Buttons: Interactive & Pill-shaped */
 button {
-    padding: 8px 12px;
     cursor: pointer;
-    border: none;
-    border-radius: 4px;
-    background: var(--accent-color);
-    color: white;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    padding: 10px 20px;
+    background-color: var(--accent-color);
+    color: #fff;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:active {
+    filter: brightness(1.2);
+    transform: scale(0.95);
 }
