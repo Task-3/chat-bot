@@ -3,9 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Theme Switcher Dashboard</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    
+    <div class="dashboard">
+        <aside class="sidebar">
+            <h2>DashBoard</h2>
+            <nav>
+                <ul>
+                    <li>Home</li>
+                    <li>Analytics</li>
+                    <li>Settings</li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="content">
+            <header>
+                <div class="user-profile">Welcome back, Alex!</div>
+                <div class="theme-controls">
+                    <button onclick="changeTheme('light')">☀️ Light</button>
+                    <button onclick="changeTheme('dark')">🌙 Dark</button>
+                    <button onclick="changeTheme('custom')">🎨 Custom</button>
+                </div>
+            </header>
+
+            <section class="grid">
+                <div class="card"><h3>Total Users</h3><p>1,284</p></div>
+                <div class="card"><h3>Revenue</h3><p>$34,200</p></div>
+                <div class="card"><h3>Active Sessions</h3><p>42</p></div>
+            </section>
+        </main>
+    </div>
+    <script src="main.js"></script>
 </body>
 </html>

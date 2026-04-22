@@ -1,0 +1,73 @@
+/* Default Variables (Light Theme) */
+:root {
+    --bg-color: #f4f7f6;
+    --sidebar-color: #ffffff;
+    --card-bg: #ffffff;
+    --text-color: #333;
+    --accent-color: #4a90e2;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+    --bg-color: #1a1a2e;
+    --sidebar-color: #16213e;
+    --card-bg: #0f3460;
+    --text-color: #e94560;
+    --accent-color: #00d2ff;
+}
+
+/* Custom (Neon/Retro) Theme Overrides */
+[data-theme="custom"] {
+    --bg-color: #2b0035;
+    --sidebar-color: #4b0082;
+    --card-bg: #1a001a;
+    --text-color: #00ff41;
+    --accent-color: #ff00ff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: all 0.3s ease; /* Smooth transition */
+}
+
+.dashboard { display: flex; min-height: 100vh; }
+
+.sidebar {
+    width: 200px;
+    background-color: var(--sidebar-color);
+    padding: 20px;
+    border-right: 1px solid rgba(0,0,0,0.1);
+}
+
+.content { flex-grow: 1; padding: 20px; }
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 8px 12px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    background: var(--accent-color);
+    color: white;
+}
