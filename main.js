@@ -23,25 +23,4 @@ async function loadSavedTheme() {
 
 // Run when DOM is ready
 window.addEventListener('DOMContentLoaded', loadSavedTheme);
-(function themeNotification() {
-    const originalApply = applyTheme;
 
-    window.applyTheme = function(themeName) {
-        originalApply(themeName);
-
-        const msg = document.createElement("div");
-        msg.innerText = `Theme: ${themeName}`;
-        msg.style.position = "fixed";
-        msg.style.bottom = "20px";
-        msg.style.right = "20px";
-        msg.style.background = "black";
-        msg.style.color = "white";
-        msg.style.padding = "10px 15px";
-        msg.style.borderRadius = "8px";
-        msg.style.zIndex = "1000";
-
-        document.body.appendChild(msg);
-
-        setTimeout(() => msg.remove(), 1500);
-    };
-})();
