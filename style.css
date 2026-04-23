@@ -8,28 +8,28 @@
 
 /* Dark Theme */
 [data-theme="dark"] {
-    --bg-color: #0b0e14;
-    --sidebar-color: #151921;
-    --card-bg: #1c212c;
-    --text-color: #f5f6f7;
+    --bg-color: #000000;
+    --sidebar-color: #4c1832;
+    --card-bg: #d14f17;
+    --text-color: blue;
     --accent-color: #03dac6;
 }
 
 /* Custom Theme */
 [data-theme="custom"] {
-    --bg-color: #120458;
+    --bg-color: #15b3c5;
     --sidebar-color: #000000;
     --card-bg: #2d033b;
-    --text-color: #fec107;
-    --accent-color: #ff0055;
+    --text-color: blue;
+    --accent-color: #a013ce;
 }
 
 /* Reset */
 body {
     margin: 0;
     font-family: 'Inter', Arial, sans-serif;
-    background: darkgrey;
-    color:white;
+    background: var(--bg-color);
+    color: white;
 }
 
 /* Layout */
@@ -69,7 +69,7 @@ body {
 }
 
 .menu-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(11, 249, 106, 0.1);
 }
 
 .menu-item.active {
@@ -110,7 +110,7 @@ header {
 }
 
 .card {
-    background: black;
+    background: rgb(76, 137, 65);
     padding: 20px;
     border-radius: 12px;
     transition: 0.3s;
