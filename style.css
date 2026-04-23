@@ -1,7 +1,7 @@
 :root {
     --bg-color: #f0f2f5;
     --sidebar-color: #1e293b;
-    --card-bg: #ffffff;
+    --card-bg: #474343;
     --text-color: #050505;
     --accent-color: #ee0077;
 }
@@ -11,16 +11,16 @@
     --bg-color: #000000;
     --sidebar-color: #4c1832;
     --card-bg: #d14f17;
-    --text-color: blue;
-    --accent-color: #03dac6;
+    --text-color: rgb(44, 44, 48);
+    --accent-color: #686969;
 }
 
 /* Custom Theme */
 [data-theme="custom"] {
-    --bg-color: #15b3c5;
+    --bg-color: #4b4e4e;
     --sidebar-color: #000000;
     --card-bg: #2d033b;
-    --text-color: blue;
+    --text-color: rgb(240, 231, 236);
     --accent-color: #a013ce;
 }
 
@@ -110,7 +110,7 @@ header {
 }
 
 .card {
-    background: rgb(76, 137, 65);
+    background:var(--card-bg);
     padding: 20px;
     border-radius: 12px;
     transition: 0.3s;
