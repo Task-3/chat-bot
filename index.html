@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StreamView - Watch Movies & Shows</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #0f0f0f;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #4ecdc4;
+        }
+
+        .nav-link.active {
+            color: #4ecdc4;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: #4ecdc4;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Search Bar */
+        .search-container {
+            display: flex;
+            gap: 1rem;
+            margin-left: auto;
+        }
+
+        .search-box {
+            padding: 0.8rem 1.2rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            width: 250px;
+            backdrop-filter: blur(10px);
+        }
+
+        .search-box::placeholder {
+            color: rgba(255,255,255,0.7);
+        }
+
+        .search-btn {
+            padding: 0.8rem 1.5rem;
+            background: linear-gradient(45deg, #4ecdc4, #44a08d);
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .search-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-top: 80px;
+            min-height: calc(100vh - 200px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600"><rect fill="%23111111" width="1200" height="600"/><circle fill="%234ecdc4" opacity="0.1" cx="200" cy="150" r="100"/><circle fill="%23ff6b6b" opacity="0.1" cx="1000" cy="400" r="150"/><rect fill="%2344a08d" opacity="0.05" x="300" y="300" width="200" height="100"/></svg>');
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #ffffff, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Content Sections */
+        .section {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .movies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .movie-card {
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .movie-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(78,205,196,0.3);
+        }
+
+        .movie-poster {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(45deg, #4ecdc4, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .movie-info {
+            padding: 1.5rem;
+        }
+
+        .movie-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .movie-category {
+            color: #4ecdc4;
+            font-weight: 500;
+        }
+
+        /* About & Contact */
+        .about-content, .contact-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1a1a;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: #4ecdc4;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: #cccccc;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #4ecdc4;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #888;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+
+            .search-container {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .movies-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="logo" onclick="showSection('home')">StreamView</a>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link" onclick="showSection('home')">Home</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('movies')">Movies</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('category')">Category</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('search')">Search Results</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('about')">About</a></li>
+                <li><a href="#" class="nav-link" onclick="showSection('contact')">Contact</a></li>
+            </ul>
+            <div class="search-container">
+                <input type="text" class="search-box" placeholder="Search movies..." id="searchInput" onkeyup="handleSearch()">
+                <button class="search-btn" onclick="performSearch()">Search</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Home Section -->
+        <section id="home" class="section active">
+            <div class="hero">
+                <div>
+                    <h1>StreamView</h1>
+                    <p>Watch unlimited movies and TV shows on your favorite devices</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movies Section -->
+        <section id="movies" class="section">
+            <h2>Featured Movies</h2>
+            <div class="movies-grid" id="moviesGrid">
+                <!-- Movies populated by JS -->
+            </div>
+        </section>
+
+        <!-- Category Section -->
+        <section id="category" class="section">
+            <h2>Movie Categories</h2>
+            <div class="movies-grid" id="categoryGrid">
+                <!-- Categories populated by JS -->
+            </div>
+        </section>
+
+        <!-- Search Results -->
+        <section id="search" class="section">
+            <h2>Search Results</h2>
+            <div id="searchResults">
+                <p style="text-align: center; color: #888; padding: 2rem;">No search results yet. Try searching for a movie!</p>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section">
+            <div class="about-content">
+                <h2>About StreamView</h2>
+                <p>StreamView is your ultimate destination for watching movies and TV shows. We offer a vast library of content across all genres, available anytime, anywhere.</p>
+                <p>Our platform features the latest blockbusters, classic films, and exclusive originals, all in stunning HD quality.</p>
+                <p>Founded in 2026, StreamView is committed to bringing you the best entertainment experience with our user-friendly interface and personalized recommendations.</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="contact-content">
+                <h2>Get In Touch</h2>
+                <p>Email: support@streamview.com</p>
+                <p>Phone: +1 (555) 123-4567</p>
+                <p>Address: 123 Streaming Street, Entertainment City, CA 90210</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>StreamView</h3>
+                <p>Watch movies and TV shows anytime, anywhere on your favorite devices.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('home')">Home</a></li>
+                    <li><a href="#" onclick="showSection('movies')">Movies</a></li>
+                    <li><a href="#" onclick="showSection('category')">Categories</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#" onclick="showSection('about')">About Us</a></li>
+                    <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">Live Chat</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 StreamView. All rights reserved. | Made with ❤️ for movie lovers</p>
+        </div>
+    </footer>
+
+    <script>
+        // Sample movie data
+        const movies = [
+            { title: "Action Hero", category: "Action", id: 1 },
+            { title: "Love Story", category: "Romance", id: 2 },
+            { title: "Dark Thriller", category: "Thriller", id: 3 },
+            { title: "Space Adventure", category: "Sci-Fi", id: 4 },
+            { title: "Comedy Night", category: "Comedy", id: 5 },
+            { title: "Horror Nights", category: "Horror", id: 6 },
+            { title: "Drama Life", category: "Drama", id: 7 },
+            { title: "Animation Fun", category: "Animation", id: 8 }
+        ];
+
+        const categories = [
+            { title: "Action", category: "action" },
+            { title: "Romance", category: "romance" },
+            { title: "Thriller", category: "thriller" },
+            { title: "Sci-Fi", category: "sci-fi" },
+            { title: "Comedy", category: "comedy" },
+            { title: "Horror", category: "horror" },
+            { title: "Drama", category: "drama" },
+            { title: "Animation", category: "animation" }
+        ];
+
+        // Navigation functionality
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            
+            // Show selected section
+            document.getElementById(sectionId).classList.add('active');
+            
+            // Update active nav link
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load content for movies/category sections
+            if (sectionId === 'movies') {
+                loadMovies();
+            } else if (sectionId === 'category') {
+                loadCategories();
+            }
+        }
+
+        // Load movies
+        function loadMovies() {
+            const grid = document.getElementById('moviesGrid');
+            grid.innerHTML = '';
+            movies.forEach(movie => {
+                const card = createMovieCard(movie);
+                grid.appendChild(card);
+            });
+        }
+
+        // Load categories
+        function loadCategories() {
+            const grid = document.getElementById('categoryGrid');
+            grid.innerHTML = '';
+            categories.forEach(cat => {
+                const card = createCategoryCard(cat);
+                grid.appendChild(card);
+            });
+        }
+
+        // Create movie card
+        function createMovieCard(movie) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            card.onclick = () => alert(`Playing: ${movie.title}`);
+            card.innerHTML = `
+                <div class="movie-poster">🎬</div>
+                <div class="movie-info">
+                    <div class="movie-title">${movie.title}</div>
+                    <div class="movie-category">${movie.category}</div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Create category card
+        function createCategoryCard(category) {
+            const card = document.createElement('div');
+            card.className = 'movie-card';
+            card.onclick = () => alert(`Showing ${category.title} movies`);
+            card.innerHTML = `
+                <div class="movie-poster" style="font-size: 3rem;">${getCategoryIcon(category.category)}</div>
+                <div class="movie-info">
+                    <div class="movie-title">${category.title}</div>
+                    <div class="movie-category">${category.category.toUpperCase()}</div>
+                </div>
+            `;
+            return card;
+        }
+
+        // Category icons
+        function getCategoryIcon(cat) {
+            const icons = {
+                action: '⚔️',
+                romance: '💕',
+                thriller: '🕵️',
+                'sci-fi': '🚀',
+                comedy: '😂',
+                horror: '👻',
+                drama: '🎭',
+                animation: '🎨'
+            };
+            return icons[cat] || '🎬';
+        }
+
+        // Search functionality
+        function handleSearch() {
+            // Real-time search as user types
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            if (query.length > 0) {
+                showSearchResults(query);
+            }
+        }
+
+        function performSearch() {
+            const query = document.getElementById('searchInput').value;
+            if (query) {
+                showSearchResults(query.toLowerCase());
+            }
+        }
+
+        function showSearchResults(query) {
+            showSection('search');
+            const results = movies.filter(movie => 
+                movie.title.toLowerCase().includes(query) || 
+                movie.category.toLowerCase().includes(query)
+            );
+            
+            const resultsDiv = document.getElementById('searchResults');
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<p style="text-align: center; color: #888; padding: 2rem;">No movies found for "' + query + '"</p>';
+            } else {
+                resultsDiv.innerHTML = `
+                    <p style="text-align: center; color: #4ecdc4; padding: 1rem 0;">Found ${results.length} result(s) for "${query}"</p>
+                    <div class="movies-grid"></div>
+                `;
+                const grid = resultsDiv.querySelector('.movies-grid');
+                results.forEach(movie => {
+                    const card = createMovieCard(movie);
+                    grid.appendChild(card);
+                });
+            }
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadMovies();
+        });
+    </script>
+</body>
+</html>

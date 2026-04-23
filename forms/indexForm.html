@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Billing Form</title>
+</head>
+<body style="padding-left: 450px;">
+
+<h2>Invoice / Billing Form</h2>
+
+<form>
+<div style="display: flex;">
+    <div>
+<h3>Customer Information</h3>
+
+<label for>Customer Name:</label><br>
+<input type="text" id="Cname" name="name"><br><br>
+
+<label for>Email:</label><br>
+<input type="email" id="email" name="email"><br><br>
+
+<label for>Phone Number:</label><br>
+<input type="tel"id="Pnumber" name="phone"><br><br>
+
+<label for>Billing Address:</label><br>
+<textarea name="address" id="Badderss"></textarea><br><br>
+
+</div>
+
+    <div style="padding-left: 50px;">
+<h3>Product Details</h3>
+
+    
+<label for>Product Name:</label><br>
+<input type="text" id="Pname" name="product"><br><br>
+
+<label for>Quantity:</label><br>
+<input type="number"id="quantity" name="quantity"><br><br>
+
+<label for>Price:</label><br>
+<input type="number" id="price"name="price">
+
+<h3>Additional Notes</h4>
+<textarea name="notes"></textarea>
+</div>
+</div>
+<div>
+<h3><mark>Payment Method</mark></h3>
+
+
+<input type="radio" name="payment"> Credit Card<br>
+<input type="radio" name="payment"> Debit Card<br>
+<input type="radio" name="payment"> UPI<br>
+<input type="radio" name="payment"> Cash<br><br>
+</div>
+<input type="submit" value="Generate Invoice">
+<input type="reset" value="Clear Form">
+
+
+
+</form>
+
+
+
+</body>
+</html>

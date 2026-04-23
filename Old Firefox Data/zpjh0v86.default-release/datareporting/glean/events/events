@@ -1,0 +1,6 @@
+{"timestamp":0,"category":"nimbus_events","name":"enrollment","extra":{"experiment":"tcp-rollout-phase-iii-tcp-on-by-default-for-50-existing-release-profiles","branch":"control","enrollment_id":"0feaa05c-5c07-4ee4-b489-76e977e59e40","experiment_type":"nimbus"}}
+{"timestamp":28,"category":"nimbus_events","name":"enroll_failed","extra":{"experiment":"tcp-rollout-phase-iii-tcp-on-by-default-for-95-existing-release-profiles","reason":"feature-conflict"}}
+{"timestamp":0,"category":"perf","name":"page_load","extra":{"js_exec_time":"161","fcp_time":"674","response_time":"427","load_type":"NORMAL","load_time":"1072"}}
+{"timestamp":0,"category":"perf","name":"page_load","extra":{"response_time":"233","load_time":"5489","fcp_time":"1343","load_type":"STOP","js_exec_time":"182"}}
+{"timestamp":10264,"category":"perf","name":"page_load","extra":{"load_time":"4818","fcp_time":"616","js_exec_time":"36","response_time":"49","load_type":"LINK"}}
+{"timestamp":13409,"category":"perf","name":"page_load","extra":{"load_type":"LINK","fcp_time":"1035","load_time":"1438","js_exec_time":"42","response_time":"94"}}

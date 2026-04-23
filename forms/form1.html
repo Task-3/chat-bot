@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>DJ Night Event Registration</title>
+</head>
+<style>
+
+ 
+    </style>    
+<style>
+    body{
+font-family: Arial;
+background-image:url("https://images.unsplash.com/photo-1541500792866-07f25e0c8578?w=1300");
+margin:0;
+    }
+    
+/* Background website content */
+.content{
+padding:40px;
+text-align:center;
+}
+
+/* Popup background */
+.popup{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(27, 27, 27, 0.5);
+backdrop-filter: blur(5px);
+display:flex;
+justify-content:center;
+align-items:center;
+}
+
+/* Form box */
+.form-box{
+background:white;
+padding:20px;
+width:300px;
+border-radius:8px;
+}
+
+/* Input fields */
+input, textarea{
+width:100%;
+padding:8px;
+margin:8px 0;
+}
+
+/* Buttons */
+button{
+padding:8px 15px;
+border:none;
+background:blue;
+color:white;
+cursor:pointer;
+}
+
+.close{
+background:rgb(162, 0, 255);
+float:right;
+}
+</style>
+
+<body style="font-family:Arial; background-color:rgb(10, 10, 10); color:white; text-align:center;">
+
+<h1 style="color:rgb(240, 240, 145);">DJ Night Event Registration</h1>
+
+<form style="background-color:hsla(9, 100%, 64%, 0); padding:20px; width:350px; margin:auto; border-radius:10px;">
+
+<label><i>Name</i></label><br>
+<input type="text" placeholder="Enter your name" style="width:90%; padding:8px;"><br><br>
+
+<label>Email</label><br>
+<input type="email" placeholder="Enter your email" style="width:90%; padding:8px;"><br><br>
+
+<label>Phone Number</label><br>
+<input type="tel" placeholder="Enter phone number" style="width:90%; padding:8px;"><br><br>
+
+<label>Gender</label><br>
+<input type="radio" name="gender"> Male
+<input type="radio" name="gender"> Female
+<input type="radio" name="gender"> Other
+<br><br>
+
+<label>Number of Tickets</label><br>
+<select style="width:95%; padding:8px;">
+<option>1</option>
+<option>2</option>
+<option>3</option>
+<option>4</option>
+</select>
+<br><br>
+
+<select style="width:95%; padding:8px;">
+<option>EDM</option>
+<option>Hip Hop</option>
+<option>Bollywood</option>
+<option>Techno</option>
+</select>
+<br><br>
+
+<label>Event Date</label><br>
+<input type="date" style="width:90%; padding:8px;"><br><br>
+
+<label>Special Requests</label><br>
+<textarea placeholder="Your message..." style="width:90%; height:60px;"></textarea>
+<br><br>
+
+<input type="submit" value="Register Now" 
+style="background-color:rgb(137, 252, 102); border:none; padding:10px 20px; font-weight:bold; cursor:pointer;">
+
+</form>
+<script>
+function closePopup(){
+console.log("thank you for registering!");
+}
+</script>
+</body>
+</html>
