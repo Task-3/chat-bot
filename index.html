@@ -3,36 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
-    <title>Document</title>
-</head>
-<body>
-=======
     <title>Theme Switcher Dashboard</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="dashboard">
-        <aside class="sidebar">
-            <h2>DashBoard</h2>
-            <nav>
-                <ul>
-                    <li>Home</li>
-                    <li>Analytics</li>
-                    <li>Settings</li>
-                </ul>
-            </nav>
-        </aside>
+    <aside class="sidebar">
+        <h2>Dashboard</h2>
+        <nav>
+            <div class="menu-item">🏠 Home</div>
+            <div class="menu-item">🗂️ Projects</div>
+            <div class="menu-item">👥 Employee</div>
+            <div class="menu-item">🏬 Departments</div>
+            <div class="menu-item">📈 Analytics</div>
+            <div class="menu-item">📖 Resources</div>
+            <div class="menu-item">🏆 Rewards</div>
+            <div class="menu-item">🎯 Challenges</div>
+            <div class="menu-item">🎫 Tickets</div>
+            <div class="menu-item">⚙️ Settings</div>
+            <div class="menu-item logout">🚪 Logout</div>
+        </nav>
+    </aside>
 
-        <main class="content">
-            <header>
-                <div class="user-profile">Welcome back, Alex!</div>
-                <div class="theme-controls">
-                    <button onclick="changeTheme('light')">☀️ Light</button>
-                    <button onclick="changeTheme('dark')">🌙 Dark</button>
-                    <button onclick="changeTheme('custom')">🎨 Custom</button>
-                </div>
-            </header>
+    <main class="content">
+        <header>
+            <div class="user-profile">Welcome back, Alex!</div>
+            <div class="theme-controls">
+                <button onclick="changeTheme('light')">☀️ Light</button>
+                <button onclick="changeTheme('dark')">🌙 Dark</button>
+                <button onclick="changeTheme('custom')">🎨 Custom</button>
+            </div>
+        </header>
 
             <section class="grid">
                 <div class="card"><h3>Total Users</h3><p>1,284</p></div>
@@ -41,7 +42,7 @@
             </section>
         </main>
     </div>
->>>>>>> maneesh
+
     <script src="main.js"></script>
 </body>
 </html>
